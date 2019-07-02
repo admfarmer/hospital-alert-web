@@ -168,13 +168,14 @@ export class HomeComponent implements OnInit {
     this.edit = false;
   }
   async alertStart() {
+    this.items_start = null;
     try {
       const rs: any = await this.alertService.alertStart();
       if (rs.info.length > 0) {
         this.items_start = rs.info;
-        console.log(this.items_start);
+        // console.log(this.items_start);
       } else {
-        this.sweetAlertService.error('เกิดข้อผิดพลาด');
+        // this.sweetAlertService.error('เกิดข้อผิดพลาด');
       }
     } catch (error) {
       console.log(error);
@@ -188,9 +189,9 @@ export class HomeComponent implements OnInit {
       // console.log(rs.info);
       if (rs.info.length > 0) {
         this.items_stop = rs.info;
-        console.log(this.items_stop);
+        // console.log(this.items_stop);
       } else {
-        this.sweetAlertService.error('เกิดข้อผิดพลาด');
+        // this.sweetAlertService.error('เกิดข้อผิดพลาด');
       }
     } catch (error) {
       console.log(error);
@@ -208,9 +209,12 @@ export class HomeComponent implements OnInit {
     }
     // const rnd = new Random();
     // const username = sessionStorage.getItem('username');
-    // const strRnd = rnd.integer(1111111111, 9999999999);
-    const clientId = `Alert-center`;
-    console.log('***!!!***');
+    const strRnd = moment(Date()).format('YYYYMMDDHHmmss');
+    // rnd.integer(1111111111, 9999999999);
+    const clientId = `Alert-center-${strRnd}`;
+    console.log(clientId);
+
+    // console.log('***!!!***');
 
     try {
       this.client = mqttClient.connect(this.notifyUrl, {
