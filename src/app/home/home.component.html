@@ -6,27 +6,27 @@
         <form>
           <section class="form-block">
             <div class="form-group">
-              <label for="hos_name">hos_name</label>
+              <label for="hos_name">สถานบริการ: </label>
               <input type="text" [(ngModel)]="hos_name" name="hos_name" id="hos_name" size="30" disabled>
             </div>
             <div class="form-group">
-              <label for="amp_name">amp_name</label>
+              <label for="amp_name">อำเภอ: </label>
               <input type="text" [(ngModel)]="amp_name" name="amp_name" id="amp_name" size="30" disabled>
             </div>
             <div class="form-group">
-              <label for="prov_name">prov_name</label>
+              <label for="prov_name">จังหวัด:</label>
               <input type="text" [(ngModel)]="prov_name" name="prov_name" id="prov_name" size="30" disabled>
             </div>
             <div class="form-group">
-              <label for="message">message</label>
+              <label for="message">ตอบรับเหตุ:</label>
               <textarea [(ngModel)]="message" name="message" id="message" size="30" rows="2"></textarea>
             </div>
           </section>
         </form>
       </div>
       <div class="modal-footer" *ngIf='edit'>
-        <button type="button" class="btn btn-outline" (click)="Cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="Save()">Ok</button>
+        <button type="button" class="btn btn-outline" (click)="Cancel()">ยกเลิก</button>
+        <button type="button" class="btn btn-primary" (click)="Save()">บันทึก</button>
       </div>
       <div>
         <p></p>
@@ -46,9 +46,9 @@
       <div class="modal-body">
         <clr-datagrid>
           <!-- <clr-dg-column>alert_id</clr-dg-column> -->
-          <clr-dg-column>hos_name</clr-dg-column>
-          <clr-dg-column>amp_name</clr-dg-column>
-          <clr-dg-column>create_date</clr-dg-column>
+          <clr-dg-column>สถารบริการ</clr-dg-column>
+          <clr-dg-column>อำเภอ</clr-dg-column>
+          <clr-dg-column>วันที่แจ้งเหตุ</clr-dg-column>
           <clr-dg-column>##</clr-dg-column>
           <clr-dg-row *clrDgItems="let i of items_start">
             <!-- <clr-dg-cell>{{i.id}}</clr-dg-cell> -->
@@ -79,17 +79,21 @@
   <h3 class="modal-title">ลงทะเบียนตอบรับ</h3>
   <div class="card-body">
     <clr-datagrid>
-      <clr-dg-column>alert_id</clr-dg-column>
-      <clr-dg-column>hos_name</clr-dg-column>
-      <clr-dg-column>amp_name</clr-dg-column>
-      <clr-dg-column>message</clr-dg-column>
-      <clr-dg-column>create_date</clr-dg-column>
+      <clr-dg-column>ลำดับ</clr-dg-column>
+      <clr-dg-column>สถานบริการ</clr-dg-column>
+      <clr-dg-column>อำเภอ</clr-dg-column>
+      <clr-dg-column>ข้อความตอบรับ</clr-dg-column>
+      <clr-dg-column>วันที่แจ้งเหตุ</clr-dg-column>
+      <clr-dg-column>วันที่ตอบรับแจ้งเหตุ</clr-dg-column>
+      <clr-dg-column>เวลาตอบรับแจ้งเหตุ</clr-dg-column>
       <clr-dg-row *clrDgItems="let i of items_stop">
         <clr-dg-cell>{{i.id}}</clr-dg-cell>
         <clr-dg-cell>{{i.hos_name}}</clr-dg-cell>
         <clr-dg-cell>{{i.amp_name}}</clr-dg-cell>
         <clr-dg-cell>{{i.message}}</clr-dg-cell>
         <clr-dg-cell>{{i.create_date | date }}</clr-dg-cell>
+        <clr-dg-cell>{{i.ans_date | date }}</clr-dg-cell>
+        <clr-dg-cell>{{i.ans_time}}</clr-dg-cell>
       </clr-dg-row>
       <clr-dg-footer>
         <clr-dg-pagination #pagination [clrDgPageSize]="10">
