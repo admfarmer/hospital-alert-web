@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
   }
 
   openEdit(items_start: any) {
-    console.log(items_start);
+    // console.log(items_start);
     let x: any = items_start;
     this.id = x.id;
     this.hos_name = x.hos_name;
@@ -136,7 +136,7 @@ export class HomeComponent implements OnInit {
     try {
       var rs: any;
       rs = await this.alertService.update(alertId, this.info);
-      console.log(rs);
+      // console.log(rs);
 
       if (rs.info > 0) {
         this.alertStart();
@@ -212,8 +212,8 @@ export class HomeComponent implements OnInit {
     const strRnd = moment(Date()).format('YYYYMMDDHHmmss');
     // rnd.integer(1111111111, 9999999999);
     const clientId = `Alert-center-${strRnd}`;
-    console.log(clientId);
 
+    // console.log(clientId);
     // console.log('***!!!***');
 
     try {
@@ -232,7 +232,9 @@ export class HomeComponent implements OnInit {
 
     this.client.on('message', (topic, payload) => {
       that.alertStart();
-      that.playSound()
+      if (this.isSound) {
+        that.playSound()
+      }
     });
 
     this.client.on('connect', () => {
@@ -287,12 +289,9 @@ export class HomeComponent implements OnInit {
   }
 
   playSound() {
-    // console.log(this.servicePointSpeak);
     this.isPlayingSound = true;
-
     const audioFiles = [];
     audioFiles.push('./assets/audio/police.mp3');
-    // audioFiles.push('./assets/audio/ka.mp3');
 
     const howlerBank = [];
 
@@ -320,19 +319,6 @@ export class HomeComponent implements OnInit {
           howlerBank[pCount].play();
         }
       }
-      // else {
-      //   this.isPlayingSound = false;
-      //   // remove queue in playlist
-      //   const idx = _.findIndex(that.playlists, { queueNumber: strQueue, roomNumber: strRoomNumber });
-      //   if (idx > -1) {
-      //     that.playlists.splice(idx, 1);
-      //   }
-      //   // call sound again
-      //   // setTimeout(() => {
-      //   //   that.isPlayingSound = false;
-      //   //   that.prepareSound();
-      //   // }, 1000);
-      // }
     };
 
     for (let i = 0; i < audioFiles.length; i++) {
@@ -342,9 +328,6 @@ export class HomeComponent implements OnInit {
         preload: true,
         html5: true,
       }));
-      // if (this.soundSpeed) {
-      //   howlerBank[i].rate(this.soundSpeed);
-      // }
     }
 
     try {
