@@ -14,7 +14,7 @@ import { ClarityModule } from '@clr/angular';
     LoginRoutingModule,
     FormsModule,
     SharedModule,
-    ClarityModule
+    ClarityModule,
   ]
 })
 export class LoginModule { }

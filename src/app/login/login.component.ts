@@ -33,14 +33,12 @@ export class LoginComponent implements OnInit {
     if (this.username && this.password) {
       try {
         const rs: any = await this.loginService.doLogin(this.username, this.password);
-        console.log(rs.token);
-
+        // console.log(rs.token);
         if (rs.token) {
           const token = rs.token;
           sessionStorage.setItem('token', token);
           const decoded: any = this.jwtHelper.decodeToken(token);
           // console.log(decoded);
-
           sessionStorage.setItem('fullname', decoded.fullname);
           sessionStorage.setItem('userType', decoded.userType);
           sessionStorage.setItem('province', decoded.province);

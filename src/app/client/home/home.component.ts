@@ -221,7 +221,7 @@ export class HomeComponent implements OnInit {
     try {
       this.client.end(true);
     } catch (error) {
-
+      // console.log(error);
     }
     // const rnd = new Random();
     // const username = sessionStorage.getItem('username');
@@ -239,7 +239,7 @@ export class HomeComponent implements OnInit {
         password: this.notifyPassword
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
 
     const topic = `alert/center/${this.provcode}`;
@@ -274,7 +274,7 @@ export class HomeComponent implements OnInit {
             try {
               that.counter.restart();
             } catch (error) {
-              console.log(error);
+              // console.log(error);
             }
           });
         }
@@ -300,7 +300,7 @@ export class HomeComponent implements OnInit {
         try {
           that.counter.restart();
         } catch (error) {
-          console.log(error);
+          // console.log(error);
         }
       });
     });
