@@ -3,7 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AlertService } from 'src/app/shared/alert.service';
 import { SweetAlertService } from 'src/app/shared/sweetalert.service';
 import * as moment from 'moment';
-import * as mqttClient from '../../vendor/mqtt';
+import * as mqttClient from 'src/vendor/mqtt';
 import { MqttClient } from 'mqtt';
 import * as _ from 'lodash';
 import * as Random from 'random-js';
@@ -45,10 +45,15 @@ export class HomeComponent implements OnInit {
   create_date: any;
   create_time: any;
   message: any;
+  remark: any;
   ans_date: any;
   ans_time: any;
   amp_name: any;
   prov_name: any;
+
+  fullname: any;
+  provcode: any;
+  userType: any;
 
   constructor(
     private alertService: AlertService,
@@ -57,7 +62,12 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
 
-  ) { }
+  ) {
+    this.userType = sessionStorage.getItem('userType');
+    this.fullname = sessionStorage.getItem('fullname');
+    this.provcode = sessionStorage.getItem('province');
+
+  }
 
   ngOnInit() {
     this.notifyUrl = `ws://203.113.117.66:8080`;
@@ -109,6 +119,7 @@ export class HomeComponent implements OnInit {
     this.province = x.province;
     this.create_date = x.create_date;
     this.create_time = x.create_time;
+    this.remark = x.remark;
     this.message = x.message;
     this.ans_date = x.ans_date;
     this.ans_time = x.ans_time;
@@ -128,6 +139,7 @@ export class HomeComponent implements OnInit {
       create_date: moment(this.create_date).format('YYYY-MM-DD'),
       create_time: this.create_time,
       message: this.message,
+      remark: this.remark,
       ans_date: moment(Date()).format('YYYY-MM-DD'),
       ans_time: moment(Date()).format('HH:mm:ss'),
       status_flg: 'N'
@@ -160,6 +172,7 @@ export class HomeComponent implements OnInit {
     this.province = null;
     this.create_date = null;
     this.create_time = null;
+    this.remark = null;
     this.message = null;
     this.ans_date = null;
     this.ans_time = null;
@@ -169,8 +182,9 @@ export class HomeComponent implements OnInit {
   }
   async alertStart() {
     this.items_start = null;
+    // console.log(this.provcode);
     try {
-      const rs: any = await this.alertService.alertStart();
+      const rs: any = await this.alertService.alertStart(this.provcode);
       if (rs.info.length > 0) {
         this.items_start = rs.info;
         // console.log(this.items_start);
@@ -184,8 +198,10 @@ export class HomeComponent implements OnInit {
   }
 
   async alertStop() {
+    // console.log(this.provcode);
+
     try {
-      const rs: any = await this.alertService.alertStop();
+      const rs: any = await this.alertService.alertStop(this.provcode);
       // console.log(rs.info);
       if (rs.info.length > 0) {
         this.items_stop = rs.info;
@@ -226,14 +242,22 @@ export class HomeComponent implements OnInit {
       console.log(error);
     }
 
-    const topic = `alert/center`;
-
+    const topic = `alert/center/${this.provcode}`;
     const that = this;
 
     this.client.on('message', (topic, payload) => {
-      that.alertStart();
-      if (this.isSound) {
-        that.playSound()
+      console.log('topic: ' + topic + ' payload: ' + payload)
+      let JsonPayload = JSON.parse(payload.toString());
+
+      if (JsonPayload === 'update') {
+        that.alertStart();
+        that.alertStop();
+      } else {
+        that.alertStart();
+        that.alertStop();
+        if (this.isSound) {
+          that.playSound()
+        }
       }
     });
 

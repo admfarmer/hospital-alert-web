@@ -13,13 +13,13 @@ export class AlertService {
     return this.httpClient.get(_url).toPromise();
   }
 
-  async alertStart() {
-    const _url = `${this.apiUrl}/alertStart`;
+  async alertStart(province) {
+    const _url = `${this.apiUrl}/alertStart/${province}`;
     return this.httpClient.get(_url).toPromise();
   }
 
-  async alertStop() {
-    const _url = `${this.apiUrl}/alertStop`;
+  async alertStop(province) {
+    const _url = `${this.apiUrl}/alertStop/${province}`;
     return this.httpClient.get(_url).toPromise();
   }
 

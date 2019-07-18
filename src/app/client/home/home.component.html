@@ -1,5 +1,54 @@
 <div class="clr-row">
-  <div class="clr-col-6">
+
+  <div class="clr-col-7">
+    <div class="card">
+      <div class="card-header">
+        รายงานเหตุ :
+        [
+        <i style="cursor: pointer;" *ngIf="isSound" (click)="toggleSound()"
+          class="h2 text-danger float-right mdi mdi-bell-ring">เปิดเสียง</i>
+        <i style="cursor: pointer;" *ngIf="!isSound" (click)="toggleSound()"
+          class="h2 text-muted float-right mdi mdi-bell-off">ปิดเสียง</i>
+        ]
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          <clr-datagrid>
+            <!-- <clr-dg-column>alert_id</clr-dg-column> -->
+            <clr-dg-column>สถารบริการ</clr-dg-column>
+            <clr-dg-column>อำเภอ</clr-dg-column>
+            <clr-dg-column>วันที่</clr-dg-column>
+            <clr-dg-column>เวลา</clr-dg-column>
+            <clr-dg-column>ข้อความ</clr-dg-column>
+            <clr-dg-column>##</clr-dg-column>
+            <clr-dg-row *clrDgItems="let i of items_start">
+              <!-- <clr-dg-cell>{{i.id}}</clr-dg-cell> -->
+              <clr-dg-cell>{{i.hos_name}}</clr-dg-cell>
+              <clr-dg-cell>{{i.amp_name}}</clr-dg-cell>
+              <clr-dg-cell>{{i.create_date | date }}</clr-dg-cell>
+              <clr-dg-cell>{{i.create_time}}</clr-dg-cell>
+              <clr-dg-cell>{{i.remark}}</clr-dg-cell>
+              <clr-dg-cell>
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-icon-append btn-gradient-success" (click)="openEdit(i)">
+                    <i class="mdi mdi-pencil"></i> ตอบรับ
+                  </button>
+                </div>
+              </clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-footer>
+              <clr-dg-pagination #pagination [clrDgPageSize]="10">
+                <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">items page</clr-dg-page-size>
+                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                of {{pagination.totalItems}} items
+              </clr-dg-pagination>
+            </clr-dg-footer>
+          </clr-datagrid>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clr-col-5">
     <div class="card">
       <div class="card-header">
         ข้อมูลตอบรับเหตุ
@@ -21,6 +70,10 @@
                 <input type="text" [(ngModel)]="prov_name" name="prov_name" id="prov_name" size="30" disabled>
               </div>
               <div class="form-group">
+                <label for="remark">ข้อความแจ้งเหตุ:</label>
+                <textarea [(ngModel)]="remark" name="remark" id="remark" size="30" rows="2"></textarea>
+              </div>
+              <div class="form-group">
                 <label for="message">ตอบรับเหตุ:</label>
                 <textarea [(ngModel)]="message" name="message" id="message" size="30" rows="2"></textarea>
               </div>
@@ -35,50 +88,6 @@
     </div>
   </div>
 
-  <div class="clr-col-6">
-    <div class="card">
-      <div class="card-header">
-        รายงานเหตุ :
-        [
-        <i style="cursor: pointer;" *ngIf="isSound" (click)="toggleSound()"
-          class="h2 text-danger float-right mdi mdi-bell-ring">เปิดเสียง</i>
-        <i style="cursor: pointer;" *ngIf="!isSound" (click)="toggleSound()"
-          class="h2 text-muted float-right mdi mdi-bell-off">ปิดเสียง</i>
-        ]
-      </div>
-      <div class="card-block">
-        <div class="card-title">
-          <clr-datagrid>
-            <!-- <clr-dg-column>alert_id</clr-dg-column> -->
-            <clr-dg-column>สถารบริการ</clr-dg-column>
-            <clr-dg-column>อำเภอ</clr-dg-column>
-            <clr-dg-column>วันที่แจ้งเหตุ</clr-dg-column>
-            <clr-dg-column>##</clr-dg-column>
-            <clr-dg-row *clrDgItems="let i of items_start">
-              <!-- <clr-dg-cell>{{i.id}}</clr-dg-cell> -->
-              <clr-dg-cell>{{i.hos_name}}</clr-dg-cell>
-              <clr-dg-cell>{{i.amp_name}}</clr-dg-cell>
-              <clr-dg-cell>{{i.create_date | date }}</clr-dg-cell>
-              <clr-dg-cell>
-                <div class="btn-group">
-                  <button class="btn btn-sm btn-icon-append btn-gradient-success" (click)="openEdit(i)">
-                    <i class="mdi mdi-pencil"></i> ตอบรับ
-                  </button>
-                </div>
-              </clr-dg-cell>
-            </clr-dg-row>
-            <clr-dg-footer>
-              <clr-dg-pagination #pagination [clrDgPageSize]="10">
-                <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">items page</clr-dg-page-size>
-                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-                of {{pagination.totalItems}} items
-              </clr-dg-pagination>
-            </clr-dg-footer>
-          </clr-datagrid>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div class="clr-row">

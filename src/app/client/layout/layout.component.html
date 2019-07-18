@@ -1,0 +1,34 @@
+<clr-main-container>
+  <header class="header-6">
+    <div class="branding">
+      <a href="home" class="nav-link">
+        <clr-icon shape="vm-bug"></clr-icon>
+        <span class="title">Hospital Alert System</span>
+      </a>
+    </div>
+    <div *ngIf="!fullname" class="header-actions">
+      <a href="#" [routerLink]="['/login']" routerLinkActive="active" class="nav-link nav-icon">LOGIN
+        <!-- <clr-icon shape="login"></clr-icon> -->
+        <!-- {{menuItems[1]}} -->
+      </a>
+    </div>
+    <div *ngIf="fullname" class="header-actions">
+      <div class="branding">
+        <span class="title">
+          {{fullname}} | &nbsp;&nbsp;
+
+          <a class="nav-link" href="#" (click)="logOut()">
+            <b>
+              <!-- <clr-icon shape="logout"></clr-icon> -->LOGOUT
+            </b>
+          </a>
+        </span>
+      </div>
+    </div>
+  </header>
+  <div class="content-container">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</clr-main-container>
