@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { JwtModule } from '@auth0/angular-jwt';
 
 import { ClientRoutingModule } from './client-routing.module';
 
@@ -21,7 +20,6 @@ import { ClientRoutingModule } from './client-routing.module';
     FormsModule,
     SharedModule,
     ClarityModule,
-    // JwtModule,
     BrowserAnimationsModule
   ]
 })
