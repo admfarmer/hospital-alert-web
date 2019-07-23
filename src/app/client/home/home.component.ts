@@ -63,17 +63,16 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
 
-  ) {
-    this.userType = sessionStorage.getItem('userType') || 'ADMIN';
-    this.fullname = sessionStorage.getItem('fullname') || 'สถานีตำรวจภูธรเมืองอุบลราชธานี';
-    this.provcode = sessionStorage.getItem('province') || '34';
-
-  }
+  ) { }
 
   ngOnInit() {
     this.notifyUrl = `ws://203.113.117.66:8080`;
     this.notifyUser = `q4u`;
     this.notifyPassword = `##q4u##`;
+    this.userType = sessionStorage.getItem('userType') || 'ADMIN';
+    this.fullname = sessionStorage.getItem('fullname') || 'สถานีตำรวจภูธรเมืองอุบลราชธานี';
+    this.provcode = sessionStorage.getItem('province') || '34';
+
 
     this.alertStop();
     // this.alertStart();
@@ -255,7 +254,7 @@ export class HomeComponent implements OnInit {
       console.log('topic: ' + topic + ' payload: ' + payload)
       let JsonPayload = JSON.parse(payload.toString());
 
-      if (JsonPayload = 'update') {
+      if (JsonPayload == 'update') {
         that.alertStart();
         that.alertStop();
       } else {
