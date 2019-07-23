@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
   hos_name: any;
   amphur: any;
   province: any;
+  hcode: any;
   create_date: any;
   create_time: any;
   message: any;
@@ -63,9 +64,9 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute
 
   ) {
-    this.userType = sessionStorage.getItem('userType');
-    this.fullname = sessionStorage.getItem('fullname');
-    this.provcode = sessionStorage.getItem('province');
+    this.userType = sessionStorage.getItem('userType') || 'ADMIN';
+    this.fullname = sessionStorage.getItem('fullname') || 'สถานีตำรวจภูธรเมืองอุบลราชธานี';
+    this.provcode = sessionStorage.getItem('province') || '34';
 
   }
 
@@ -111,12 +112,13 @@ export class HomeComponent implements OnInit {
   }
 
   openEdit(items_start: any) {
-    // console.log(items_start);
+    console.log(items_start);
     let x: any = items_start;
     this.id = x.id;
     this.hos_name = x.hos_name;
     this.amphur = x.amphur;
     this.province = x.province;
+    this.hcode = x.hcode;
     this.create_date = x.create_date;
     this.create_time = x.create_time;
     this.remark = x.remark;
@@ -131,11 +133,14 @@ export class HomeComponent implements OnInit {
   }
   async Save() {
     // this.edit = false;
+    console.log(this.hcode);
+
     let alertId = this.id;
     this.info = {
       hos_name: this.hos_name,
       amphur: this.amphur,
       province: this.province,
+      hcode: this.hcode,
       create_date: moment(this.create_date).format('YYYY-MM-DD'),
       create_time: this.create_time,
       message: this.message,
@@ -170,6 +175,7 @@ export class HomeComponent implements OnInit {
     this.hos_name = null;
     this.amphur = null;
     this.province = null;
+    this.hcode = null;
     this.create_date = null;
     this.create_time = null;
     this.remark = null;
@@ -198,7 +204,7 @@ export class HomeComponent implements OnInit {
   }
 
   async alertStop() {
-    // console.log(this.provcode);
+    console.log(this.provcode);
 
     try {
       const rs: any = await this.alertService.alertStop(this.provcode);
@@ -249,7 +255,7 @@ export class HomeComponent implements OnInit {
       console.log('topic: ' + topic + ' payload: ' + payload)
       let JsonPayload = JSON.parse(payload.toString());
 
-      if (JsonPayload === 'update') {
+      if (JsonPayload = 'update') {
         that.alertStart();
         that.alertStop();
       } else {

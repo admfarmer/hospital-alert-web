@@ -13,17 +13,17 @@ export class LayoutComponent implements OnInit {
   userType: any;
 
   constructor(private router: Router) {
-    this.userType = sessionStorage.getItem('userType');
-    this.fullname = sessionStorage.getItem('fullname');
-    this.provcode = sessionStorage.getItem('province');
+    this.userType = sessionStorage.getItem('userType') || 'ADMIN';
+    this.fullname = sessionStorage.getItem('fullname') || 'สถานีตำรวจภูธรเมืองอุบลราชธานี';
+    this.provcode = sessionStorage.getItem('province') || '34';
 
   }
 
   ngOnInit() {
-    if (!this.fullname) {
-      this.router.navigate(['/login']);
+    // if (!this.fullname) {
+    //   this.router.navigate(['/login']);
 
-    }
+    // }
   }
 
   logOut() {
