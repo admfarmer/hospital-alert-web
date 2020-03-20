@@ -73,7 +73,6 @@ export class HomeComponent implements OnInit {
     this.fullname = sessionStorage.getItem('fullname') || 'สถานีตำรวจภูธรเมืองอุบลราชธานี';
     this.provcode = sessionStorage.getItem('province') || '34';
 
-
     this.alertStop();
     // this.alertStart();
     this.initialSocket();
@@ -320,7 +319,8 @@ export class HomeComponent implements OnInit {
   playSound() {
     this.isPlayingSound = true;
     const audioFiles = [];
-    audioFiles.push('./assets/audio/police.mp3');
+    audioFiles.push('http://203.113.117.68/downloads/police.mp3');
+    // audioFiles.push('./assets/audio/police.mp3');
 
     const howlerBank = [];
 
