@@ -319,8 +319,8 @@ export class HomeComponent implements OnInit {
   playSound() {
     this.isPlayingSound = true;
     const audioFiles = [];
-    audioFiles.push('http://203.113.117.68/downloads/police.mp3');
-    // audioFiles.push('./assets/audio/police.mp3');
+    // audioFiles.push('http://203.113.117.68/downloads/police.mp3');
+    audioFiles.push('./assets/audio/police.mp3');
 
     const howlerBank = [];
 
